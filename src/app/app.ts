@@ -1,11 +1,14 @@
 import { Component, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Zodiaco } from './formulario/zodiaco/zodiaco';
 import {  Navbar } from './navbar/navbar';
+import {Distancia} from './formulario/distancia/distancia';
+import { ListaEscuela } from './escuela/lista-escuela/lista-escuela';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Zodiaco, Navbar],
+  imports: [RouterOutlet, Zodiaco, Navbar, Distancia, ListaEscuela],
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
