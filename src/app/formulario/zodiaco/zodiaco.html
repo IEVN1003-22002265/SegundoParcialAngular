@@ -1,0 +1,54 @@
+<div style="display: flex; justify-content: center; gap: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 30px; background-color: #f5f5f5; border-radius: 12px; max-width: 900px; margin: 20px auto;">
+    
+    <div class="col-6" style="flex: 1; background: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #e9ecef;">
+        <div class="form-group pt-4" style="margin-bottom: 20px;">
+            <h3 style="color: #2c3e50; font-size: 1.3rem; margin-bottom: 15px;">Datos personales</h3>
+            
+            <p style="margin: 8px 0 4px 0; font-weight: 600; color: #4a5568; font-size: 0.9rem;">Nombre</p>
+            <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" class="form-control"
+                placeholder="Ingresa tu nombre" style="width: 100%; padding: 8px 12px; margin-bottom: 10px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box;">
+            
+            <p style="margin: 8px 0 4px 0; font-weight: 600; color: #4a5568; font-size: 0.9rem;">Apellido paterno</p>
+            <input type="text" id="Apaterno" name="Apaterno" [(ngModel)]="Apaterno" class="form-control"
+                placeholder="Ingresa tu apellido paterno" style="width: 100%; padding: 8px 12px; margin-bottom: 10px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box;">
+            
+            <p style="margin: 8px 0 4px 0; font-weight: 600; color: #4a5568; font-size: 0.9rem;">Apellido materno</p>
+            <input type="text" id="Amaterno" name="Amaterno" [(ngModel)]="Amaterno" class="form-control"
+                placeholder="Ingresa tu apellido materno" style="width: 100%; padding: 8px 12px; margin-bottom: 10px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: #2c3e50; font-size: 1.3rem; margin-bottom: 15px;">Fecha de nacimiento</h3>
+            <div style="display: flex; gap: 8px;">
+                <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="dia" class="form-control"
+                    placeholder="DD" style="flex: 1; padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 6px; text-align: center;">
+                <input type="number" min="1" max="12" id="mes" name="mes" [(ngModel)]="mes" class="form-control"
+                    placeholder="MM" style="flex: 1; padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 6px; text-align: center;">
+                <input type="number" min="1900" max="2026" id="anio" name="año" [(ngModel)]="anio" class="form-control"
+                    placeholder="AAAA" style="flex: 1.5; padding: 8px 12px; border: 1px solid #cbd5e0; border-radius: 6px; text-align: center;">
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: #2c3e50; font-size: 1.3rem; margin-bottom: 15px;">sexo</h3>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <input class="form-check-input" type="radio" name="sexo" id="masculino" value="masculino" style="cursor: pointer; width: 16px; height: 16px;">
+                <p style="margin: 0; color: #2d3748;">Masculino</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <input class="form-check-input" type="radio" name="sexo" id="femenino" value="femenino" style="cursor: pointer; width: 16px; height: 16px;">
+                <p style="margin: 0; color: #2d3748;">Femenino</p>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-danger me-2" (click)="imprimir()" style="background-color: #e53e3e; color: white; border: none; padding: 10px 24px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; width: 100%; margin-top: 10px;">Imprimir</button>
+    </div>
+
+    <div style="flex: 1; background: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #e9ecef; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <p style="font-size: 1.2rem; color: #2d3748; margin-bottom: 12px;">Hola <strong style="color: #2b6cb0;">{{nombre}} {{Apaterno}} {{Amaterno}}</strong> </p>
+        <p style="font-size: 1.1rem; color: #4a5568; margin-bottom: 12px;">Tienes <strong style=" color: #e53e3e;">{{Redad}}</strong> </p>
+        <p style="font-size: 1.1rem; color: #4a5568; margin-bottom: 15px;">Tu signo zodiacal es <strong style="color: #2b6cb0;">{{Rmes}}</strong></p>
+        <p style="margin: 0;"><img [src]="imagen" style="width: 200px; margin: 10px;"></p>
+    </div>
+
+</div>
