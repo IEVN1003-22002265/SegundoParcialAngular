@@ -19,8 +19,14 @@ export const routes: Routes = [
                         (c) => c.Zodiaco
                     ),
             },
+
+        ]
+    },
+    {
+        path: 'escuela',
+        children: [
             {
-                path: 'list-escuela',
+                path: 'lista-escuela',
                 loadComponent: () =>
                     import('./escuela/lista-escuela/lista-escuela').then(
                         (c) => c.ListaEscuela
@@ -28,6 +34,8 @@ export const routes: Routes = [
             }
         ]
     },
+
+    
 
     { path: '', redirectTo: "admin", pathMatch: "full" },
     { path: '"', redirectTo: 'admin' },
