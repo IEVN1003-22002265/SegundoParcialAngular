@@ -4,3 +4,9 @@ export interface Alumno {
     correo:string,
     materia:string,
 }
+
+export interface Cine {
+    nombre:string,
+    compradores:number,
+    cantidad:number,
+}

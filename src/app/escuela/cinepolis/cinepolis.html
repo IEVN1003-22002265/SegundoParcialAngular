@@ -1,0 +1,86 @@
+<body class="bg-cover bg-center bg-no-repeat min-h-screen"
+    style="background: radial-gradient(ellipse at center, #00b4d8 0%, #0077b6 35%, #03045e 70%, #02011f 100%); min-height: 100vh; margin: 0; background-attachment: fixed;">
+
+    <div class="relative z-10 flex flex-col items-center justify-center min-h-screen py-10 px-4">
+
+        <br><br><br>
+        <h1 class="text-white text-4xl font-extrabold mb-10 tracking-wide">Cinépolis</h1>
+
+        <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-8 w-full max-w-5xl">
+
+            <form [formGroup]="formulario"
+                class="w-full max-w-md bg-white backdrop-blur-md p-8 rounded-2xl shadow-2xl space-y-5 border border-white">
+                <h2 class="text-xl font-bold text-black mb-2">Registro de Compra</h2>
+
+                <div>
+                    <label for="nombre" class="block mb-2 text-sm font-medium text-black">Nombre</label>
+                    <input formControlName="nombre" type="text" id="nombre"
+                        class="bg-white/10 border border-white/20 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full px-3 py-2.5 placeholder-gray-400"
+                        placeholder="Ingresar nombre" required />
+                </div>
+
+                <div>
+                    <label for="compradores" class="block mb-2 text-sm font-medium text-black">Cantidad de
+                        compradores</label>
+                    <input formControlName="compradores" type="number" id="compradores"
+                        class="bg-white/10 border border-white/20 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full px-3 py-2.5 placeholder-gray-400"
+                        placeholder="Ingresar cantidad" required />
+                </div>
+
+                <div>
+                    <label for="cantidad" class="block mb-2 text-sm font-medium text-black">Cantidad de boletos</label>
+                    <input formControlName="cantidad" type="number" id="cantidad"
+                        class="bg-white/10 border border-white/20 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full px-3 py-2.5 placeholder-gray-400"
+                        placeholder="Ingresar cantidad de boletos" required />
+                </div>
+
+                <fieldset class="border-0 p-0 m-0">
+                    <label class="block mb-2 text-sm font-medium text-black">Cineco</label>
+                    <legend class="sr-only">Cineco</legend>
+
+                    <div class="flex space-x-6">
+                        <div class="flex items-center">
+                            <input formControlName="sino" id="si" type="radio" value="si"
+                                class="w-4 h-4 text-cyan-600 bg-white/10 border-white/30 focus:ring-cyan-500 focus:ring-2">
+                            <label for="si" class="select-none ms-2 text-sm font-medium text-black">
+                                Sí
+                            </label>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input formControlName="sino" id="no" type="radio" value="no"
+                                class="w-4 h-4 text-cyan-600 bg-white/10 border-white/30 focus:ring-cyan-500 focus:ring-2">
+                            <label for="no" class="select-none ms-2 text-sm font-medium text-black">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="flex space-x-4 pt-4">
+                    <button (click)="muestraCompra()" type="button"
+                        class="flex-1 text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-colors">Procesar</button>
+                    <button type="button"
+                        class="flex-1 text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-colors">Salir</button>
+                </div>
+            </form>
+
+            <div
+                class="w-full max-w-md bg-black/40 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/10 flex flex-col justify-center space-y-4 text-white">
+                <h2 class="text-2xl font-bold border-b border-white/20 pb-3">Ticket</h2>
+                <div class="space-y-3 text-base">
+                    <p class="flex justify-between"><span class="text-gray-300 font-medium">Nombre:</span> <span
+                            class="font-semibold">{{this.nuevaCompra.nombre}}</span></p>
+                    <p class="flex justify-between"><span class="text-gray-300 font-medium">Compradores:</span> <span
+                            class="font-semibold">{{nuevaCompra.compradores}}</span></p>
+                    <p class="flex justify-between"><span class="text-gray-300 font-medium">Boletos:</span> <span
+                            class="font-semibold">{{nuevaCompra.cantidad}}</span></p>
+                    <p class="flex justify-between"><span class="text-gray-300 font-medium">Precio total:</span> <span
+                            class="font-semibold text-emerald-400">{{this.costo}}</span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
