@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Alumno } from '../alumno';
 
 @Component({
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   selector: 'app-lista-escuela',
   styleUrl: './lista-escuela.css',
   templateUrl: './lista-escuela.html',
@@ -11,7 +13,9 @@ import { Alumno } from '../alumno';
 export class ListaEscuela implements OnInit {
   formulario: FormGroup
 
-  alumno: Alumno[] = []
+  alumnos: Alumno[] = []
+
+  indiceEdition:number = -1;
 
   nuevoAlumno: Alumno = {
     matricula: '',
@@ -42,13 +46,19 @@ export class ListaEscuela implements OnInit {
       alert('Todos los campos son oblogatorios')
       return
     }
-
-    this.alumno.push({...this.nuevoAlumno})
+    if(this.indiceEdition !== -1){
+      this.alumnos[this.indiceEdition]={
+        ...this.nuevoAlumno
+      }
+    }else{
+      this.alumnos.push({ ...this.nuevoAlumno })
+    }
 
     localStorage.setItem(
       'alumnos',
-      JSON.stringify(this.alumno)
+      JSON.stringify(this.alumnos)
     )
+    this.limpiarCampos()
   }
 
   muestraAlumno(): void {
@@ -64,8 +74,46 @@ export class ListaEscuela implements OnInit {
     const datos = localStorage.getItem('alumnos');
 
     if (datos) {
-      this.alumno = JSON.parse(datos);
+      this.alumnos = JSON.parse(datos);
     }
+  }
+
+  eliminarAlumno(index: number): void {
+    this.alumnos.splice(index, 1)
+    localStorage.setItem(
+      'alumnos',
+      JSON.stringify(this.alumnos)
+    )
+  }
+
+  limpiarCampos():void{
+    this.nuevoAlumno = {
+      matricula: '',
+      nombre: '',
+      correo: '',
+      materia: '',
+    }
+    this.formulario.patchValue({
+      matricula: this.nuevoAlumno.matricula,
+      nombre: this.nuevoAlumno.nombre,
+      correo: this.nuevoAlumno.correo,
+      materia: this.nuevoAlumno.materia,
+    })
+    this.indiceEdition= -1
+  }
+
+  editarAlumno(index:number):void{
+    this.nuevoAlumno={
+      ...this.alumnos[index]
+    }
+    const alumno=this.alumnos[index]
+    this.formulario.patchValue({
+      matricula: alumno.matricula,
+      nombre: alumno.nombre,
+      correo: alumno.correo,
+      materia: alumno.materia
+    })
+    this.indiceEdition=index
   }
 
 }

@@ -38,6 +38,13 @@ export const routes: Routes = [
                     import('./escuela/cinepolis/cinepolis').then(
                         (c) => c.Cinepolis
                     ),
+            },
+            {
+                path: 'mostrar-ventas',
+                loadComponent: () =>
+                    import('./escuela/mostrar-ventas/mostrar-ventas').then(
+                        (c) => c.MostrarVentas
+                    ),
             }
         ]
     },

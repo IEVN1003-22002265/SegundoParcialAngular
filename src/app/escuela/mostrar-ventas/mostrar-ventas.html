@@ -1,0 +1,169 @@
+<!-- Tabla -->
+<div class="max-w-6xl mx-auto mt-8">
+    <div *ngIf="mostrarModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="w-full max-w-md p-6 bg-white rounded-2xl shadow-2xl border border-gray-200">
+            <h3 class="mb-4 text-xl font-bold text-gray-900">Editar Registro</h3>
+
+            <form [formGroup]="formulario" (ngSubmit)="guardarEdicion()" class="space-y-4">
+                <div>
+                    <label for="modal-nombre" class="block mb-1 text-sm font-medium text-gray-700">Nombre</label>
+                    <input type="text" id="modal-nombre" formControlName="nombre" placeholder="Ingresar nombre"
+                        class="w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500">
+                </div>
+
+                <div>
+                    <label for="modal-compradores" class="block mb-1 text-sm font-medium text-gray-700">Cantidad de
+                        compradores</label>
+                    <input type="number" id="modal-compradores" formControlName="compradores" min="0"
+                        placeholder="Ingresar cantidad"
+                        class="w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500">
+                </div>
+
+                <div>
+                    <label for="modal-cantidad" class="block mb-1 text-sm font-medium text-gray-700">Cantidad de
+                        boletos</label>
+                    <input type="number" id="modal-cantidad" formControlName="cantidad" min="0"
+                        placeholder="Ingresar cantidad de boletos"
+                        class="w-full px-3 py-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500">
+                </div>
+
+                <!-- Radio Buttons Cineco -->
+                <fieldset class="border-0 p-0 m-0">
+                    <label class="block mb-2 text-sm font-medium text-gray-700">Cineco</label>
+                    <legend class="sr-only">Cineco</legend>
+
+                    <div class="flex space-x-6">
+                        <div class="flex items-center">
+                            <input formControlName="sino" id="modal-si" type="radio" value="si"
+                                class="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 focus:ring-cyan-500 focus:ring-2">
+                            <label for="modal-si" class="select-none ms-2 text-sm font-medium text-gray-900">
+                                Sí
+                            </label>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input formControlName="sino" id="modal-no" type="radio" value="no"
+                                class="w-4 h-4 text-cyan-600 bg-gray-100 border-gray-300 focus:ring-cyan-500 focus:ring-2">
+                            <label for="modal-no" class="select-none ms-2 text-sm font-medium text-gray-900">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="flex justify-end gap-3 mt-6 pt-2">
+                    <button type="button" (click)="cerrarModal()"
+                        class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h2 class="mb-4 text-2xl font-bold text-gray-900">
+        Lista de alumnos
+    </h2>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+
+        <table class="w-full text-sm text-left text-gray-500">
+
+            <!-- Encabezado -->
+            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Nombre
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Cantidad de compradores
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Cantidad de boletos
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Cineco
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Costo
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Acciones
+                    </th>
+                </tr>
+
+            </thead>
+
+            <!-- Datos -->
+            <tbody>
+
+                <tr *ngFor="let compra of compras let i = index"
+                    class="bg-white border-b border-gray-200 hover:bg-gray-50">
+
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-center">
+                        {{ compra.nombre }}
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        {{ compra.compradores }}
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        {{ compra.cantidad }}
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        {{ compra.sino }}
+                    </td>
+
+                    <td class="px-6 py-4 text-center">
+                        {{ compra.costo }}
+                    </td>
+
+                    <td class="px-6 py-4">
+
+                        <div class="flex gap-2">
+
+                            <!-- Botón Editar -->
+                            <button type="button"
+                                class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300"
+                                (click)="editarCompra(i)">
+                                Editar
+                            </button>
+
+                            <!-- Botón Eliminar -->
+                            <button type="button"
+                                class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
+                                (click)="eliminarCompra(i)">
+                                Eliminar
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Mensaje cuando no existen alumnos -->
+    <div *ngIf="compras.length === 0" class="p-4 mt-4 text-sm text-gray-800 rounded-lg bg-gray-100" role="alert">
+        <span class="font-medium">Información:</span>
+        No hay alumnos registrados.
+    </div>
+
+</div>
