@@ -1,0 +1,100 @@
+<div class="max-w-5xl mx-auto my-8 p-6 bg-slate-100 rounded-3xl shadow-xl">
+
+
+    <div class="mb-6 p-5 bg-white rounded-2xl shadow-sm flex justify-between items-center">
+        <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight flex items-center gap-2.5">
+            <span class="w-2.5 h-6 bg-emerald-500 rounded-full inline-block shadow-sm"></span>
+            Alumnos
+        </h1>
+
+        <button (click)="cargarAlumnos()"
+            style="background-color: #10b981; color: #ffffff;"
+            class="px-5 py-2.5 rounded-2xl text-sm font-bold shadow-lg shadow-emerald-500/30 active:scale-95 transition-all flex items-center gap-2.5 cursor-pointer hover:opacity-90">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            Cargar Datos
+        </button>
+    </div>
+
+    <div class="space-y-6">
+
+        <!-- Sección de Filtro -->
+        <div class="p-5 bg-white rounded-2xl shadow-sm flex flex-col md:flex-row items-center gap-4">
+            <label class="block text-sm font-bold text-slate-700 whitespace-nowrap">
+                Filtrar por:
+            </label>
+            <input [(ngModel)]="listFilter" type="text"
+                class="bg-slate-50 text-slate-900 text-sm rounded-xl focus:ring-2 focus:ring-emerald-500 focus:outline-none block w-full p-3 transition-all placeholder-slate-400 border border-slate-200"
+                placeholder="Ingrese nombre del alumno">
+        </div>
+
+        <div *ngIf="listFilter">
+            <h3 class="text-xs font-semibold text-emerald-800 bg-emerald-100/60 px-4 py-2 rounded-xl inline-block">
+                Filtro: <span class="font-normal text-slate-700">{{listFilter}}</span>
+            </h3>
+        </div>
+
+        <div class="overflow-hidden rounded-2xl shadow-sm bg-white">
+
+            <table class="w-full text-sm text-left text-slate-600">
+
+                <thead style="background-color: #059669; color: #ffffff;" class="text-xs font-bold uppercase tracking-wider">
+                    <tr>
+                        <th scope="col" class="px-6 py-4">Matrícula</th>
+                        <th scope="col" class="px-6 py-4">Nombre</th>
+                        <th scope="col" class="px-6 py-4">APaterno</th>
+                        <th scope="col" class="px-6 py-4">AMaterno</th>
+                        <th scope="col" class="px-6 py-4">Correo</th>
+                        <th scope="col" class="px-6 py-4 text-center">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-100">
+                    <tr *ngFor="let alumno of dataSource | alumnosFilter:listFilter"
+                        class="bg-white hover:bg-emerald-50/40 transition-colors">
+
+                        <td class="px-6 py-4 font-semibold text-slate-900 whitespace-nowrap">
+                            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-bold">
+                                {{alumno.matricula}}
+                            </span>
+                        </td>
+
+                        <td class="px-6 py-4 font-medium text-slate-800">
+                            {{alumno.nombre}}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-600">
+                            {{alumno.apaterno}}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-600">
+                            {{alumno.amaterno}}
+                        </td>
+
+                        <td class="px-6 py-4 text-slate-500 font-mono text-xs">
+                            {{alumno.correo}}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            <div class="flex justify-center items-center space-x-3">
+                                <a [routerLink]="['/utl/editar', alumno.matricula]"
+                                    class="px-3.5 py-1.5 text-white bg-blue-600 hover:bg-blue-700 rounded-xl text-xs font-semibold shadow-md shadow-blue-600/20 active:scale-95 transition-all">
+                                    Editar
+                                </a>
+                                <button (click)="eliminarAlumno(alumno.matricula)"
+                                    class="px-3.5 py-1.5 text-white bg-red-600 hover:bg-red-700 rounded-xl text-xs font-semibold shadow-md shadow-red-600/20 active:scale-95 transition-all">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
